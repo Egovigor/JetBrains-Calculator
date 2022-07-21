@@ -2,8 +2,8 @@ msg = {0: "Enter an equation",
        1: "Do you even know what numbers are? Stay focused!",
        2: "Yes ... an interesting math operation. You've slept through all classes, haven't you?",
        3: "Yeah... division by zero. Smart move...",
-       4: "Do you want to store the result?  y / n):",
-       5: "Do you want to continue calculations?  y / n):",
+       4: "Do you want to store the result? (y / n):",
+       5: "Do you want to continue calculations? (y / n):",
        6: " ... lazy",
        7: " ... very lazy",
        8: " ... very, very lazy",
@@ -74,28 +74,42 @@ while True:
 
     print(result)
 
-    while True:
+    flag_0 = True
+    while flag_0:
         answer = input(msg[4])
         if answer == 'y':
-        else:
-            memory = result
-
+            if is_one_digit(result):
+                msg_index = 10
+                flag = True
+                while flag:
+                    answer = input(msg[msg_index])
+                    if answer == 'y':
+                        if msg_index < 12:
+                            msg_index += 1
+                        else:
+                            flag = False
+                            flag_0 = False
+                            memory = result
+                    elif answer == 'n':
+                        flag = False
+                        flag_0 = False
+            else:
+                flag_0 = False
+                memory = result
         elif answer == 'n':
-        break
-    else:
-        continue
+            flag_0 = False
 
-start = False
-while True:
-    answer = input(msg[5])
-    if answer == 'y':
-        start = True
-        break
-    elif answer == 'n':
-        break
-    else:
-        continue
+    start = False
+    while True:
+        answer = input(msg[5])
+        if answer == 'y':
+            start = True
+            break
+        elif answer == 'n':
+            break
+        else:
+            continue
 
-if start:
-    continue
-break
+    if start:
+        continue
+    break
